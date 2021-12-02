@@ -1,0 +1,45 @@
+{
+  "id": "c43066af-dd4d-4cf0-85b1-df94469440be",
+  "name": "EXPO_BC01",
+  "publisher": "ITBASEN",
+  "version": "1.0.0.10",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "LOGO/logo.png",
+  "dependencies": [
+    {
+      "appId": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+      "publisher": "Microsoft",
+      "name": "Base Application",
+      "version": "16.0.0.0"
+    },
+    {
+      "appId": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
+      "publisher": "Microsoft",
+      "name": "System Application",
+      "version": "1.0.0.0"
+    },
+    
+    {
+      "name": "OIOUBL",
+      "appId": "ac762be1-e90f-4a72-b519-612a5e3ddc2e",
+      "publisher": "Microsoft","version": "15.0.36560.0"
+      }
+
+  ],
+  "screenshots": [],
+  "platform": "16.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 71000
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://EXPO_BC01.com/help/",
+  "showMyCode": true,
+  "runtime": "4.0"
+}
