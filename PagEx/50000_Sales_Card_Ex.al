@@ -11,7 +11,7 @@ pageextension 50000 ITB_SalesOrder_Card extends "Sales Order"
                 field(Trykfarve1; Rec.Trykfarve1)
                 {
                     ApplicationArea = all;
-                    ToolTip = 'Trykfarve1';//
+                    ToolTip = 'Trykfarve1';
                     Editable = false;
                 }
                 field(Trykfarve2; Rec.Trykfarve2)
