@@ -40,6 +40,7 @@ pageextension 50002 CustList_Ext extends "Customer List"
                     ToolTip = 'Oversigt over tidligere pakkelister';
                 }
 
+
                 /*    action(xmltest)
                     {
                         ApplicationArea = All;
@@ -54,6 +55,23 @@ pageextension 50002 CustList_Ext extends "Customer List"
                             Xmlport.Run(50102, false, false);//
                         end;
                     }*/
+            }
+
+            action("Kopi Debitor")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Kopi af Kunde';
+                Ellipsis = true;
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Opret ny kunde som kopi af den aktuelle';
+                //Visible = NOT IsOfficeHost;
+
+                trigger OnAction()
+                begin
+                    Page.Run(Page::ITB_Cust_Copy, Rec);
+                end;
             }
         }
 
