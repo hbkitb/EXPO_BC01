@@ -82,9 +82,9 @@ page 50001 "ITB_Cust_Copy"
                     CustNew.Reset;
                     if (CustNew.get(CustNo)) or (CustNo = '') then begin
                         Message('Debitornummer eksisterer eller er blank - Oprettes IKKE !');
-                        Message('før');
+                        //Message('før');
                         exit;
-                        Message('efter');
+                        //Message('efter');
                     end
                     else begin
                         Clear(CustNew);

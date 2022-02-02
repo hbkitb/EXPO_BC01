@@ -82,9 +82,9 @@ page 50002 "ITB_Vend_Copy"
                     VendNew.Reset;
                     if (VendNew.get(VendNo)) or (VendNo = '') then begin
                         Message('Kreditornummer eksisterer eller er blank - Oprettes IKKE !');
-                        Message('før');
+                        //Message('før');
                         exit;
-                        Message('efter');
+                        //Message('efter');
                     end
                     else begin
                         Clear(VendNew);
