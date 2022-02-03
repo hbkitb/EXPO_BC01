@@ -56,7 +56,7 @@ page 50003 "ITB_Item_Copy"
                 Promoted = true;
                 PromotedCategory = Process;
                 ToolTip = 'Opret ny vare som kopi af den aktuelle';
-                //Visible = NOT IsOfficeHost;
+                //Visible = NOT IsOfficeHost;//
 
 
                 trigger OnAction()
