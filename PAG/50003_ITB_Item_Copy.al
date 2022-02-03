@@ -170,8 +170,12 @@ page 50003 "ITB_Item_Copy"
 
                         //310122 <-
 
-                        Message('Varenummer er oprettet !');
+                        //Message('Varenummer er oprettet !');
+                        if Dialog.Confirm('Varenummer er oprettet ! Ønsker du at hoppe til det nye varenummer: ' + ItemNew."No." + ' ?') then begin
+                            Page.Run(Page::"Item Card", ItemNew);
+                        end;
                         ItemNo := '';
+                        CurrPage.Close;
                     end;
 
 

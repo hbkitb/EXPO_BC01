@@ -142,8 +142,12 @@ page 50001 "ITB_Cust_Copy"
 
                         //310122 <-
 
-                        Message('Kunde er oprettet !');
+                        //Message('Kunde er oprettet !');
+                        if Dialog.Confirm('Kunde er oprettet ! Ønsker du at hoppe til den nye kunde: ' + CustNew."No." + ' ?') then begin
+                            Page.Run(Page::"Customer Card", CustNew);
+                        end;
                         CustNo := '';
+                        CurrPage.Close;
                     end;
 
 

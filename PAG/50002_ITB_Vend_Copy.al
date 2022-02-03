@@ -142,8 +142,12 @@ page 50002 "ITB_Vend_Copy"
 
                         //310122 <-
 
-                        Message('Leverandør er oprettet !');
+                        //Message('Leverandør er oprettet !');
+                        if Dialog.Confirm('Leverandør er oprettet ! Ønsker du at hoppe til den nye Leverandør: ' + VendNew."No." + ' ?') then begin
+                            Page.Run(Page::"Vendor Card", VendNew);
+                        end;
                         VendNo := '';
+                        CurrPage.Close;
                     end;
 
 
