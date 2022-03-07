@@ -5,7 +5,7 @@ codeunit 50151 "50151_Diverse_OP_ERPG"
     begin
         MESSAGE('igang');
         //Mydialog.Open('Agiv kørsel', Svar01);
-        Svar01 := Dialog.StrMenu('Imp LagKart,Imp DebKart,Imp Medarb,Imp Varegrp,Imp KostVAL,Check Kost');
+        Svar01 := Dialog.StrMenu('Imp LagKart,Imp DebKart,Imp Medarb,Imp Varegrp,Imp KostVAL,Check Kost,Fakt.konto');
 
         case Svar01 of
             1:
@@ -42,6 +42,11 @@ codeunit 50151 "50151_Diverse_OP_ERPG"
                     Message(Format(CurrencyExRate));
                     Currency.GetLastestExchangeRate('EUR', DateT, CurrencyExRate);
                     Message(Format(CurrencyExRate));
+                end;
+            7:
+                begin
+                    Message('Deb. FakturaKonto');
+                    Xmlport.Run(Xmlport::"50158_Imp_Deb_InvAcc");
                 end;
         end;
         /* 230719 
