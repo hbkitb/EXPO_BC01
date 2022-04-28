@@ -115,10 +115,11 @@ tableextension 50001 ITB_Sales extends "Sales Header"
 
     }
 
-    trigger OnBeforeInsert()
+    trigger OnAfterInsert()
 
     begin
-        Rec."Shipment Date" := 0D;
+        Rec."Shipment Date" := Today + 730;
+        Rec.Modify;
     end;
 
 }
