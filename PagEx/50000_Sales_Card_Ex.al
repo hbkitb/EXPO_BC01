@@ -44,10 +44,11 @@ pageextension 50000 ITB_SalesOrder_Card extends "Sales Order"
                     ApplicationArea = all;
                     ToolTip = 'Tegning';
                 }
-                field(NormalOprul; Rec.NormalOprul)
+                field(AfrulningsRetning; Rec.AfrulningsRetning)
                 {
                     ApplicationArea = all;
-                    ToolTip = 'Normasl oprulning';
+                    ToolTip = 'Afrulning';
+                    Editable = false;
                 }
                 field(Genoptryk; Rec.Genoptryk)
                 {
