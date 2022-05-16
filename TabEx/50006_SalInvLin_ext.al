@@ -8,6 +8,11 @@ tableextension 50006 SalInvLin_ext extends "Sales Invoice Line"
             Caption = 'PalleNr';
 
         }
+        field(50001; LineReference; Text[30])
+        {
+            Caption = 'Reference';
+
+        }
 
     }
 

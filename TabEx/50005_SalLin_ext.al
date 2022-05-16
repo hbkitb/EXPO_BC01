@@ -8,7 +8,11 @@ tableextension 50005 SalLin_ext extends "Sales Line"
             Caption = 'PalleNr';
 
         }
+        field(50001; LineReference; Text[30])
+        {
+            Caption = 'Reference';
 
+        }
     }
 
 }
