@@ -185,12 +185,12 @@ pageextension 50000 ITB_SalesOrder_Card extends "Sales Order"
             action("OrdPak")
             {
                 ApplicationArea = Basic, Suite;
-                Caption = '2. Pakkeliste';
+                Caption = '2. Pakkeseddel';
                 Ellipsis = true;
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Category11;
-                ToolTip = 'Udskriver Pakkeliste';
+                ToolTip = 'Udskriver Pakkeseddel';
                 //Visible = NOT IsOfficeHost;
 
                 trigger OnAction()
