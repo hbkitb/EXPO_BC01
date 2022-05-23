@@ -30,6 +30,24 @@ pageextension 50005 ItemList_Ext extends "Item List"
                     Page.Run(Page::ITB_Item_Copy, Rec);
                 end;
             }
+
+            action(Kundelinier)
+            {
+                ApplicationArea = All;
+                Caption = 'Kundelinier';
+                Image = Inventory;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                RunObject = Page "Value Entries";
+                RunPageLink = "Item No." = FIELD("No."), "Item Ledger Entry Type" = filter(1);
+                RunPageView = SORTING("Item Ledger Entry Type", "Posting Date", "Item No.", "Inventory Posting Group", "Dimension Set ID")
+                              //ORDER(Ascending);
+                              order(descending);
+                ShortCutKey = 'Ctrl+F7';
+                ToolTip = 'Vis alle Kunde/varelinier.';
+            }
+
         }
 
 

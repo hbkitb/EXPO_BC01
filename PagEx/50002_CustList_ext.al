@@ -73,6 +73,27 @@ pageextension 50002 CustList_Ext extends "Customer List"
                     Page.Run(Page::ITB_Cust_Copy, Rec);
                 end;
             }
+
+            //2305
+
+            action(VareLinier)
+            {
+                ApplicationArea = All;
+                Caption = 'Varelinier';
+                Image = Inventory;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                RunObject = Page "Value Entries";
+                RunPageLink = "Source No." = FIELD("No."), "Item Ledger Entry Type" = filter(1);
+                RunPageView = SORTING("Item Ledger Entry Type", "Posting Date", "Item No.", "Inventory Posting Group", "Dimension Set ID")
+                              //ORDER(Ascending);
+                              order(descending);
+                ShortCutKey = 'Ctrl+F7';
+                ToolTip = 'Vis alle varelinier.';
+            }
+
+            //2305
         }
 
 
