@@ -615,5 +615,79 @@ codeunit 50148 "Inno EventSubscriber"
         */
     end;
 
+    //HBK / ITB - 310522 - tag nyeste navn/adr fra inv.account
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Copy Document Mgt.", 'OnAfterCopySalesDocument', '', false, false)]
+    local procedure ITB_Copy_sales_New_InvCust(var ToSalesHeader: Record "Sales Header")
+    var
+        InvCust: Record Customer;
+        SalLin: Record "Sales Line";
+
+
+    begin
+        Clear(InvCust);
+        InvCust.Reset;
+        InvCust.SetRange("No.", ToSalesHeader."Bill-to Customer No.");
+        if InvCust.FindSet then begin
+            if (InvCust.Name <> ToSalesHeader."Bill-to Name") or
+               (InvCust.Address <> ToSalesHeader."Bill-to Address") or
+               (InvCust."Address 2" <> ToSalesHeader."Bill-to Address 2") or
+               (InvCust."Post Code" <> ToSalesHeader."Bill-to Post Code") or
+               (InvCust.City <> ToSalesHeader."Bill-to City") or
+               (InvCust."Country/Region Code" <> ToSalesHeader."Bill-to Country/Region Code") then begin
+                ToSalesHeader."Bill-to Name" := InvCust.Name;
+                ToSalesHeader."Bill-to Address" := InvCust.Address;
+                ToSalesHeader."Bill-to Address 2" := InvCust."Address 2";
+                ToSalesHeader."Bill-to Post Code" := InvCust."Post Code";
+                ToSalesHeader."Bill-to City" := InvCust.City;
+                ToSalesHeader."Bill-to Country/Region Code" := InvCust."Country/Region Code";
+
+                ToSalesHeader.Modify;
+            end;
+        end;
+
+        ToSalesHeader."Order Date" := Today;
+        ToSalesHeader."Posting Date" := Today;
+        ToSalesHeader."Document Date" := Today;
+        ToSalesHeader.Validate("Order Date");
+        ToSalesHeader.Validate("Posting Date");
+        ToSalesHeader.Validate("Document Date");
+        if ToSalesHeader."Shipment Date" < Today then
+            ToSalesHeader."Shipment Date" := Today;
+
+        ToSalesHeader.Modify;
+
+        Clear(SalLin);
+        SalLin.Reset;
+        SalLin.SetRange("Document No.", ToSalesHeader."No.");
+        if SalLin.FindSet then
+            repeat
+                SalLin.PalleNr := 0;
+                SalLin.Modify;
+            until SalLin.Next = 0
+
+
+    end;
+
+    /*  310522  - Copy sales - Header
+    
+            OnAfterCopySalesDocument(
+              FromDocType.AsInteger(), FromDocNo, ToSalesHeader, FromDocOccurrenceNo, FromDocVersionNo, IncludeHeader, RecalculateLines, MoveNegLines);
+
+    
+     [IntegrationEvent(false, false)]
+    local procedure OnAfterCopySalesDocument(FromDocumentType: Option; FromDocumentNo: Code[20]; var ToSalesHeader: Record "Sales Header"; FromDocOccurenceNo: Integer; FromDocVersionNo: Integer; IncludeHeader: Boolean; RecalculateLines: Boolean; MoveNegLines: Boolean)
+    begin
+    end;
+
+
+report 292
+OnAfterValidateIncludeHeader(IncludeHeader, RecalculateLines);
+
+
+    
+    */
+
+
+
 
 }
