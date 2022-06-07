@@ -668,24 +668,46 @@ codeunit 50148 "Inno EventSubscriber"
 
     end;
 
-    /*  310522  - Copy sales - Header
-    
-            OnAfterCopySalesDocument(
-              FromDocType.AsInteger(), FromDocNo, ToSalesHeader, FromDocOccurrenceNo, FromDocVersionNo, IncludeHeader, RecalculateLines, MoveNegLines);
+    //070622
+    [EventSubscriber(ObjectType::Report, Report::"Copy Sales Document", 'OnAfterValidateIncludeHeaderProcedure', '', true, false)]
+    local procedure ITB_Req_headLine(var IncludeHeader: Boolean; var RecalculateLines: Boolean)
+    var
 
-    
-     [IntegrationEvent(false, false)]
-    local procedure OnAfterCopySalesDocument(FromDocumentType: Option; FromDocumentNo: Code[20]; var ToSalesHeader: Record "Sales Header"; FromDocOccurenceNo: Integer; FromDocVersionNo: Integer; IncludeHeader: Boolean; RecalculateLines: Boolean; MoveNegLines: Boolean)
+
     begin
+        IncludeHeader := true;
+        RecalculateLines := false;
     end;
 
 
-report 292
-OnAfterValidateIncludeHeader(IncludeHeader, RecalculateLines);
+    //070622
+
+    /*  310522  - Copy sales - Header
+ [IntegrationEvent(true, false)]
+    local procedure OnAfterValidateIncludeHeader(var IncludeHeader: Boolean; var RecalculateLines: Boolean)
+    begin
+    end;
+
+ OnAfterValidateIncludeHeaderProcedure(IncludeHeader, RecalculateLines);
 
 
-    
-    */
+
+             OnAfterCopySalesDocument(
+               FromDocType.AsInteger(), FromDocNo, ToSalesHeader, FromDocOccurrenceNo, FromDocVersionNo, IncludeHeader, RecalculateLines, MoveNegLines);
+
+
+      [IntegrationEvent(false, false)]
+     local procedure OnAfterCopySalesDocument(FromDocumentType: Option; FromDocumentNo: Code[20]; var ToSalesHeader: Record "Sales Header"; FromDocOccurenceNo: Integer; FromDocVersionNo: Integer; IncludeHeader: Boolean; RecalculateLines: Boolean; MoveNegLines: Boolean)
+     begin
+     end;
+
+
+ report 292
+ OnAfterValidateIncludeHeader(IncludeHeader, RecalculateLines);
+
+
+
+     */
 
 
 
