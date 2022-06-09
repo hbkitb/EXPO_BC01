@@ -208,6 +208,8 @@ xmlport 50160 "50156_Imp_LagKart"
                     Item.Type_ := Item.Type_::Dispenser;
 
                 Evaluate(Item."Gross Weight", Felt12);
+                Evaluate(Item."Net Weight", Felt13);
+                Evaluate(Item."Unit Volume", Felt14);
 
                 Item.Modify;
             /*
