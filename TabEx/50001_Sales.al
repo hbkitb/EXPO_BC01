@@ -119,6 +119,7 @@ tableextension 50001 ITB_Sales extends "Sales Header"
 
     begin
         Rec."Shipment Date" := Today + 730;
+        Rec."Ship-to Contact" := '';  //130622
         Rec.Modify;
     end;
 
