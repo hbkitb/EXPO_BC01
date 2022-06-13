@@ -77,7 +77,7 @@ codeunit 50148 "Inno EventSubscriber"
                             if Found = false then begin
                                 Item.Reset;
                                 Item.SetRange("No.", SalesLineHead."No.");
-                                Item.SetRange("Assembly BOM", true);
+                                //130622 Item.SetRange("Assembly BOM", true);
                                 if Item.FindFirst then begin
                                     Found := true;
 
@@ -144,7 +144,7 @@ codeunit 50148 "Inno EventSubscriber"
                         if Found = false then begin
                             Item.Reset;
                             Item.SetRange("No.", SalesLineHead."No.");
-                            Item.SetRange("Assembly BOM", true);
+                            //130622 Item.SetRange("Assembly BOM", true);
                             if Item.FindFirst then begin
                                 Found := true;
                                 Salesheader.Trykfarve1 := Item.Trykfarve1;
@@ -219,7 +219,7 @@ codeunit 50148 "Inno EventSubscriber"
 
                             Item.Reset;
                             Item.SetRange("No.", SalesLineHead."No.");
-                            Item.SetRange("Assembly BOM", true);
+                            //130622 Item.SetRange("Assembly BOM", true);
                             //Message('line');
                             if Item.FindFirst then begin
                                 Found := true;
@@ -293,7 +293,7 @@ codeunit 50148 "Inno EventSubscriber"
 
                             Item.Reset;
                             Item.SetRange("No.", SalesLineHead."No.");
-                            Item.SetRange("Assembly BOM", true);
+                            //130622 Item.SetRange("Assembly BOM", true);
                             if Item.FindFirst then begin
                                 found := true;
                                 Salesheader.Trykfarve1 := Item.Trykfarve1;
