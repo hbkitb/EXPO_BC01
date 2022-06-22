@@ -61,7 +61,7 @@ codeunit 50148 "Inno EventSubscriber"
         // 040521
         if Rec."Assembly BOM" = true then begin
             SalesHeader.Reset;
-            SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::Order);
+            //220622 SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::Order);
             SalesHeader.SetRange(Status, SalesHeader.Status::Open);
 
             if SalesHeader.FindSet then begin
@@ -137,7 +137,7 @@ codeunit 50148 "Inno EventSubscriber"
                 SalesLineHead.Reset;
                 SalesLineHead.SetCurrentKey("Document Type", "Document No.", "Line No.");
                 SalesLineHead.SetRange("Document No.", Rec."Document No.");
-                SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order, Rec."Document Type"::Quote);
+                //220622 SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order,Rec."Document Type"::Quote);
                 SalesLineHead.SetRange(Type, SalesLineHead.Type::Item);
                 if SalesLineHead.FindSet then begin
                     repeat
@@ -210,7 +210,7 @@ codeunit 50148 "Inno EventSubscriber"
                 SalesLineHead.Reset;
                 SalesLineHead.SetCurrentKey("Document Type", "Document No.", "Line No.");
                 SalesLineHead.SetRange("Document No.", Rec."Document No.");
-                SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order, Rec."Document Type"::Quote);
+                //220622 SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order);
                 SalesLineHead.SetRange(Type, SalesLineHead.Type::Item);
                 //Message('header');
                 if SalesLineHead.FindSet then begin
@@ -285,7 +285,7 @@ codeunit 50148 "Inno EventSubscriber"
                 SalesLineHead.Reset;
                 SalesLineHead.SetCurrentKey("Document Type", "Document No.", "Line No.");
                 SalesLineHead.SetRange("Document No.", Rec."Document No.");
-                SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order, Rec."Document Type"::Quote);
+                //220622 SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order);
                 SalesLineHead.SetRange(Type, SalesLineHead.Type::Item);
                 if SalesLineHead.FindSet then begin
                     repeat
