@@ -59,7 +59,8 @@ codeunit 50148 "Inno EventSubscriber"
     begin
 
         // 040521
-        if Rec."Assembly BOM" = true then begin
+        //220622  if Rec."Assembly BOM" = true then begin
+        if Rec.Type = Rec.Type::Inventory then begin    //220622
             SalesHeader.Reset;
             //220622 SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::Order);
             SalesHeader.SetRange(Status, SalesHeader.Status::Open);
