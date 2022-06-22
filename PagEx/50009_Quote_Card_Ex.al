@@ -1,4 +1,4 @@
-pageextension 50008 ITB_SalesQoute_Card extends "Sales Quote"
+pageextension 50009 ITB_SalesQoute_Card extends "Sales Quote"
 {
     layout
     {
