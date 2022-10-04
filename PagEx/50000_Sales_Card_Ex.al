@@ -61,6 +61,18 @@ pageextension 50000 ITB_SalesOrder_Card extends "Sales Order"
                     ToolTip = 'Kvalitet / Farve';
                     Editable = false;
                 }
+                field(TrykLgd; Rec.TrykLgd)
+                {
+                    ApplicationArea = all;
+                    ToolTip = 'Tryklængde';
+                    Editable = false;
+                }
+                field(KlicheNr; Rec.KlicheNr)
+                {
+                    ApplicationArea = all;
+                    ToolTip = 'Klichenummer';
+                    Editable = false;
+                }
                 field(NetWeight; Rec.NetWeight)
                 {
                     ApplicationArea = all;

@@ -1,3 +1,6 @@
+/// <summary>
+/// Page ITB_Vend_Copy (ID 50002).
+/// </summary>
 page 50002 "ITB_Vend_Copy"
 {
     Caption = 'Kreditor opret / kopi';

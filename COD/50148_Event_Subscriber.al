@@ -1,3 +1,6 @@
+/// <summary>
+/// Codeunit Inno EventSubscriber (ID 50148).
+/// </summary>
 codeunit 50148 "Inno EventSubscriber"
 {
     trigger OnRun()
@@ -47,7 +50,8 @@ codeunit 50148 "Inno EventSubscriber"
 
     //070521 - Her kommer vedr. Modify (Evt. Delete varer opdat oplysn. på åbne salgsordrer)
     [EventSubscriber(ObjectType::Table, 27, 'OnAfterModifyEvent', '', true, true)]
-    local procedure ItemSetSalesHeaderMod(VAR Rec: Record Item; RunTrigger: Boolean)
+    //local procedure ItemSetSalesHeaderMod(VAR Rec: Record Item; RunTrigger: Boolean)
+    local procedure ItemSetSalesHeaderMod(VAR Rec: Record Item; VAR xRec: Record Item; RunTrigger: Boolean)
     var
 
 
@@ -57,57 +61,61 @@ codeunit 50148 "Inno EventSubscriber"
         Found: Boolean;
 
     begin
-
+        //Message(xrec.Trykfarve1);
+        //Message(Rec.Trykfarve1);
         // 040521
         //220622  if Rec."Assembly BOM" = true then begin
-        if Rec.Type = Rec.Type::Inventory then begin    //220622
-            SalesHeader.Reset;
-            //220622 SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::Order);
-            SalesHeader.SetRange(Status, SalesHeader.Status::Open);
+        if (xRec.Trykfarve1 <> Rec.Trykfarve1) or (xRec.Trykfarve2 <> Rec.Trykfarve2) or (xRec.Trykfarve3 <> Rec.Trykfarve3) or (xRec.Trykfarve4 <> Rec.Trykfarve4) or
+           (xRec."Gross Weight" <> Rec."Gross Weight") or (xRec.KvalFarve <> Rec.KvalFarve) or (xRec.TrykLgd <> Rec.TrykLgd) or (xRec.KlicheNr <> Rec.KlicheNr) or
+           (xRec.Remark <> Rec.Remark) or (xRec.Type_ <> Rec.Type_) or (xRec.AfrulningsRetning <> Rec.AfrulningsRetning) or (xRec."Unit Volume" <> Rec."Unit Volume") then begin
+            if Rec.Type = Rec.Type::Inventory then begin    //220622
+                SalesHeader.Reset;
+                //220622 SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::Order);
+                SalesHeader.SetRange(Status, SalesHeader.Status::Open);
 
-            if SalesHeader.FindSet then begin
-                repeat
-                    Found := false;
-                    SalesLineHead.Reset;
-                    SalesLineHead.SetCurrentKey("Document Type", "Document No.", "Line No.");
-                    SalesLineHead.SetRange("Document No.", SalesHeader."No.");
-                    SalesLineHead.SetRange("Document Type", SalesHeader."Document Type");
-                    SalesLineHead.SetRange(Type, SalesLineHead.Type::Item);
-                    if SalesLineHead.FindSet then begin
-                        repeat
-                            if Found = false then begin
-                                Item.Reset;
-                                Item.SetRange("No.", SalesLineHead."No.");
-                                //130622 Item.SetRange("Assembly BOM", true);
-                                if Item.FindFirst then begin
-                                    Found := true;
+                if SalesHeader.FindSet then begin
+                    repeat
+                        Found := false;
+                        SalesLineHead.Reset;
+                        SalesLineHead.SetCurrentKey("Document Type", "Document No.", "Line No.");
+                        SalesLineHead.SetRange("Document No.", SalesHeader."No.");
+                        SalesLineHead.SetRange("Document Type", SalesHeader."Document Type");
+                        SalesLineHead.SetRange(Type, SalesLineHead.Type::Item);
+                        if SalesLineHead.FindSet then begin
+                            repeat
+                                if Found = false then begin
+                                    Item.Reset;
+                                    Item.SetRange("No.", SalesLineHead."No.");
+                                    //130622 Item.SetRange("Assembly BOM", true);
+                                    if Item.FindFirst then begin
+                                        Found := true;
 
-                                    if SalesLineHead."No." = rec."No." then begin
-                                        if Dialog.Confirm('Ændre farve mv på salgsordre ' + SalesHeader."No." + ' Debitor: ' + SalesHeader."Sell-to Customer Name") then begin
-                                            Salesheader.Trykfarve1 := Item.Trykfarve1;
-                                            Salesheader.Trykfarve2 := Item.Trykfarve2;
-                                            Salesheader.Trykfarve3 := Item.Trykfarve3;
-                                            Salesheader.Trykfarve4 := Item.Trykfarve4;
-                                            Salesheader.BrtWeight := Item."Gross Weight";
-                                            Salesheader.KvalFarve := Item.KvalFarve;
-                                            Salesheader.TrykLgd := Item.TrykLgd;
-                                            Salesheader.KlicheNr := Item.KlicheNr;
-                                            Salesheader.Remark := Item.Remark;
-                                            Salesheader.Type_ := Item.Type_;
-                                            Salesheader.AfrulningsRetning := Item.AfrulningsRetning;
-                                            Salesheader.Volume := Item."Unit Volume";
-                                            Salesheader.Modify;
-                                        end;
-                                    end
+                                        if SalesLineHead."No." = rec."No." then begin
+                                            if Dialog.Confirm('Ændre farve mv på salgsordre ' + SalesHeader."No." + ' Debitor: ' + SalesHeader."Sell-to Customer Name") then begin
+                                                Salesheader.Trykfarve1 := Item.Trykfarve1;
+                                                Salesheader.Trykfarve2 := Item.Trykfarve2;
+                                                Salesheader.Trykfarve3 := Item.Trykfarve3;
+                                                Salesheader.Trykfarve4 := Item.Trykfarve4;
+                                                Salesheader.BrtWeight := Item."Gross Weight";
+                                                Salesheader.KvalFarve := Item.KvalFarve;
+                                                Salesheader.TrykLgd := Item.TrykLgd;
+                                                Salesheader.KlicheNr := Item.KlicheNr;
+                                                Salesheader.Remark := Item.Remark;
+                                                Salesheader.Type_ := Item.Type_;
+                                                Salesheader.AfrulningsRetning := Item.AfrulningsRetning;
+                                                Salesheader.Volume := Item."Unit Volume";
+                                                Salesheader.Modify;
+                                            end;
+                                        end
 
+                                    end;
                                 end;
-                            end;
-                        until SalesLineHead.Next = 0;
-                    end;
-                until SalesHeader.Next = 0;
+                            until SalesLineHead.Next = 0;
+                        end;
+                    until SalesHeader.Next = 0;
+                end;
             end;
-        end;
-
+        end; //check på hvilke felter
     end;
 
 
@@ -130,10 +138,12 @@ codeunit 50148 "Inno EventSubscriber"
         //040521
         //Message((Format(rec."Line No.")));
         if Rec."Line No." <> 0 then begin
+            //Message('ind 0001');
             SalesHeader.Reset;
             SalesHeader.SetRange("Document Type", Rec."Document Type");
             SalesHeader.SetRange("No.", Rec."Document No.");
             if SalesHeader.FindFirst then begin
+                //Message('ind 0002');
                 Found := false;
                 SalesLineHead.Reset;
                 SalesLineHead.SetCurrentKey("Document Type", "Document No.", "Line No.");
@@ -141,12 +151,14 @@ codeunit 50148 "Inno EventSubscriber"
                 //220622 SalesLineHead.SetRange("Document Type", Rec."Document Type"::Order,Rec."Document Type"::Quote);
                 SalesLineHead.SetRange(Type, SalesLineHead.Type::Item);
                 if SalesLineHead.FindSet then begin
+                    //Message('ind 0003');
                     repeat
                         if Found = false then begin
                             Item.Reset;
                             Item.SetRange("No.", SalesLineHead."No.");
                             //130622 Item.SetRange("Assembly BOM", true);
                             if Item.FindFirst then begin
+                                //Message('ind 0004');
                                 Found := true;
                                 Salesheader.Trykfarve1 := Item.Trykfarve1;
                                 Salesheader.Trykfarve2 := Item.Trykfarve2;
@@ -160,6 +172,9 @@ codeunit 50148 "Inno EventSubscriber"
                                 Salesheader.Type_ := Item.Type_;
                                 Salesheader.AfrulningsRetning := Item.AfrulningsRetning;
                                 Salesheader.Volume := Item."Unit Volume";
+                                SalesHeader.ItemNo_Expo := SalesLineHead."No.";
+                                SalesHeader.ItemDesc_Expo := SalesLineHead.Description;  //250822
+                                SalesHeader.Modify;  //250822
                             end;
 
 
@@ -179,7 +194,10 @@ codeunit 50148 "Inno EventSubscriber"
                     Salesheader.Remark := ''; //Item.Remark;
                     Salesheader.Type_ := Item.Type_::" ";   //Item.Type_;
                     Salesheader.AfrulningsRetning := Item.AfrulningsRetning::" ";   //Item.AfrulningsRetning;
-                    Salesheader.Volume := 0;  //Item."Unit Volume";                    
+                    Salesheader.Volume := 0;  //Item."Unit Volume";
+                    SalesHeader.ItemNo_Expo := '';
+                    SalesHeader.ItemDesc_Expo := '';  //250822  
+                    SalesHeader.Modify;  //250822                  
                 end;
             end;
         end;
@@ -236,6 +254,8 @@ codeunit 50148 "Inno EventSubscriber"
                                 Salesheader.Type_ := Item.Type_;
                                 Salesheader.AfrulningsRetning := Item.AfrulningsRetning;
                                 Salesheader.Volume := Item."Unit Volume";
+                                SalesHeader.ItemNo_Expo := SalesLineHead."No.";
+                                SalesHeader.ItemDesc_Expo := SalesLineHead.Description;  //250822                                
                                 Salesheader.Modify;
 
                                 //Message('item');
@@ -256,6 +276,8 @@ codeunit 50148 "Inno EventSubscriber"
                     Salesheader.Type_ := Item.Type_::" ";   //Item.Type_;
                     Salesheader.AfrulningsRetning := Item.AfrulningsRetning::" ";   //Item.AfrulningsRetning;
                     Salesheader.Volume := 0;  //Item."Unit Volume";   
+                    SalesHeader.ItemNo_Expo := '';
+                    SalesHeader.ItemDesc_Expo := '';  //250822                       
                     SalesHeader.Modify;
                 end;
             end;
@@ -309,6 +331,8 @@ codeunit 50148 "Inno EventSubscriber"
                                 Salesheader.Type_ := Item.Type_;
                                 Salesheader.AfrulningsRetning := Item.AfrulningsRetning;
                                 Salesheader.Volume := Item."Unit Volume";
+                                SalesHeader.ItemNo_Expo := SalesLineHead."No.";
+                                SalesHeader.ItemDesc_Expo := SalesLineHead.Description;  //250822                                             
                                 Salesheader.Modify;
 
                             end;
@@ -328,6 +352,8 @@ codeunit 50148 "Inno EventSubscriber"
                     Salesheader.Type_ := Item.Type_::" ";   //Item.Type_;
                     Salesheader.AfrulningsRetning := Item.AfrulningsRetning::" ";   //Item.AfrulningsRetning;
                     Salesheader.Volume := 0;  //Item."Unit Volume";       
+                    SalesHeader.ItemNo_Expo := '';
+                    SalesHeader.ItemDesc_Expo := '';  //250822                       
                     SalesHeader.Modify;
                 end;
             end;

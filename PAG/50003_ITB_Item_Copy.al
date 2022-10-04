@@ -1,3 +1,6 @@
+/// <summary>
+/// Page ITB_Item_Copy (ID 50003).
+/// </summary>
 page 50003 "ITB_Item_Copy"
 {
     Caption = 'Vare opret / kopi';

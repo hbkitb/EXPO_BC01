@@ -1,3 +1,6 @@
+/// <summary>
+/// Codeunit 50151_Diverse_OP_ERPG (ID 50151).
+/// </summary>
 codeunit 50151 "50151_Diverse_OP_ERPG"
 {
 

@@ -2,8 +2,19 @@ pageextension 50005 ItemList_Ext extends "Item List"
 {
     layout
     {
+        addafter("Base Unit of Measure")
+        {
+            field(KlicheNr; Rec.KlicheNr)
+            {
+                ApplicationArea = all;
+                ToolTip = 'Kliche nummer';
 
-
+                trigger OnValidate()
+                begin
+                    //UpdateSalesHeadertEXPO();
+                end;
+            }
+        }
 
     }
 

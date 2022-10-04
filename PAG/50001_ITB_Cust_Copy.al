@@ -1,3 +1,6 @@
+/// <summary>
+/// Page ITB_Cust_Copy (ID 50001).
+/// </summary>
 page 50001 "ITB_Cust_Copy"
 {
     Caption = 'Debitor opret / kopi';

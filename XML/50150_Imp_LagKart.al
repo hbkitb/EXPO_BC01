@@ -191,6 +191,12 @@ xmlport 50160 "50156_Imp_LagKart"
 
         IF Item.FINDSET then
             repeat
+                if Felt03 = '1' then
+                    Item.Blocked := true;
+                //nyt felt item.desc2 := felt02;
+
+
+                /* 220822
                 evaluate(Item.StkKrt, Felt02);
                 Item.Trykfarve1 := Felt03;
                 Item.Trykfarve2 := Felt04;
@@ -210,6 +216,8 @@ xmlport 50160 "50156_Imp_LagKart"
                 Evaluate(Item."Gross Weight", Felt12);
                 Evaluate(Item."Net Weight", Felt13);
                 Evaluate(Item."Unit Volume", Felt14);
+220822 */
+
 
                 Item.Modify;
             /*

@@ -2,6 +2,18 @@ pageextension 50156 "Item_Card_Ex ERPG" extends "Item Card"
 {
     layout
     {
+        addafter("Qty. on Asm. Component")
+        {
+            field(DispExpo; DispExpo)
+            {
+                ApplicationArea = all;
+                ToolTip = 'Disp_EXPO';
+                Editable = false;  //190822
+
+            }
+
+
+        }
 
         addafter(InventoryGrp)
         {
@@ -119,8 +131,6 @@ pageextension 50156 "Item_Card_Ex ERPG" extends "Item Card"
 
                 }
 
-
-
             }
         }
         // Add changes to page layout here
@@ -167,6 +177,13 @@ pageextension 50156 "Item_Card_Ex ERPG" extends "Item Card"
 
 
     var
+        DispExpo: Decimal;
+
+    trigger OnAfterGetRecord()
+    begin
+        //DispExpo := Inventory - "Qty. on Sales Order" + "Qty. on Purch. Order" + "Qty. on Assembly Order" - "Qty. on Asm. Component";
+        DispExpo := Inventory - "Qty. on Sales Order" - "Qty. on Asm. Component";
+    end; //190822
 
     local procedure UpdateSalesHeadertEXPO()
     var

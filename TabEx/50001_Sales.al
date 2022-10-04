@@ -112,6 +112,19 @@ tableextension 50001 ITB_Sales extends "Sales Header"
             Caption = 'Rumfang';
 
         }
+        field(50021; ItemNo_Expo; Code[20])
+        {
+            Caption = 'VareNr';
+            Editable = false;
+
+        }
+        field(50022; ItemDesc_Expo; Text[100])
+        {
+            Caption = 'VareBesk';
+            Editable = false;
+        }
+
+
 
     }
 
